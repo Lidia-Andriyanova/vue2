@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for="product in products" :key="product.id">
+            <h3>{{ product.name }} </h3>
+            <p>{{ product.price }} </p>
+        </div>
+
+        <div>
+            <h5>Цена по:</h5>
+            <label for="up">
+                <input type="radio" value="up" id="up" v-model="sortDirection">
+                возрастанию
+            </label>
+            <label for="down">
+                <input type="radio" value="down" id="down" v-model="sortDirection">
+                убыванию
+            </label>
+            <div>
+                <button @click="sort">
+                    Упорядочить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                products: [
+                    {
+                        id: 1,
+                        name: 'Смартфон Apple iPhone 14',
+                        price: 120_000
+                    },
+                    {
+                        id: 2,
+                        name: 'Смартфон Realme C55',
+                        price: 18_000
+                    },
+                    {
+                        id: 3,
+                        name: 'Смартфон Xiaomi Redmi Note 12S',
+                        price: 24_000
+                    },   
+                    {
+                        id: 4,
+                        name: 'Смартфон Infinix Note 30',
+                        price: 19_000
+                    },  
+                    {
+                        id: 5,
+                        name: 'Смартфон HUAWEI P60 Pro',
+                        price: 70_000
+                    }                                                                                
+                ],
+                sortDirection: '',
+            },
+            methods: {
+                sort() {
+                    console.log(this.sortDirection);
+                    this.products.sort((a, b) => a.price - b.price)
+                    if (this.sortDirection === 'down')  {
+                        this.products.reverse()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
